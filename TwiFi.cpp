@@ -76,6 +76,8 @@ static void setupWiFiSettings() {
         EEPROM.begin(512);
         prevWiFi = currWiFi = (int) EEPROM.read(EEPROM_WIFI);
         EEPROM.end();
+        if (currWiFi >= vEntryCount)
+            prevWiFi = currWiFi = DEFAULT_WIFI;
         if (vDebug)
             Serial.println("Loaded WiFi settings from EEPROM.");
     }
@@ -190,7 +192,7 @@ bool twifiConnect(bool repeatAttempts) {
 
             fConnectFail(currWiFi);
 
-            if (counter >= vEntryCount && !repeatAttempts)
+            if (counter >= vEntryCount - 1 && !repeatAttempts)
                 return false;
 
             currWiFi++;
