@@ -53,14 +53,14 @@ void setup() {
 
     /* Initialize the TwiFi library. */
     twifiInit(
-        wifis,           // WiFi array
-        WIFI_COUNT,      // Number of WiFis
-        "Test_Device",   // Host name
-        10,              // Seconds to keep trying one WiFi
-        &connectAttempt, // Function called on individual attempts
-        &connectSuccess, // Function called on successful connection
-        &connectFail,    // Function called on failed connection
-        true             // Perform debugging
+        wifis,            // WiFi array
+        WIFI_COUNT,       // Number of WiFis
+        "Example_Device", // Host name
+        10,               // Seconds to keep trying one WiFi
+        &connectAttempt,  // Function called on individual attempts
+        &connectSuccess,  // Function called on successful connection
+        &connectFail,     // Function called on failed connection
+        true              // Perform debugging
         );
 
     /* Connect to first available WiFi, repeat attempts. */
