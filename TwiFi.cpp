@@ -39,7 +39,7 @@ bool        vDebug;
 int         vTimeout;
 
 /* Stored Functions */
-void (*fConnectAttempt)(int attempt);
+void (*fConnectAttempt)(int idEntry, int attempt);
 void (*fConnectSuccess)(int idEntry);
 void (*fConnectFail)(int idEntry);
 
@@ -109,7 +109,7 @@ static bool attemptWiFiConnection(char* ssid, char* pass, char* conf, bool isOpe
     #ifdef ESP32
         WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);
     #endif
-    
+
     if (isOpen)
         WiFi.begin(ssid, NULL);
     else    
@@ -126,7 +126,7 @@ static bool attemptWiFiConnection(char* ssid, char* pass, char* conf, bool isOpe
             Serial.print(".");
         attempt++;
             
-        fConnectAttempt(attempt);
+        fConnectAttempt(currWiFi, attempt);
     }
     if (WiFi.status() == WL_CONNECTED) {
         if (vDebug) {
@@ -149,7 +149,7 @@ void twifiInit(
     int entryCount,
     char* hostName,
     int timeout,
-    void (*connectAttempt)(int attempt),
+    void (*connectAttempt)(int idEntry, int attempt),
     void (*connectSuccess)(int idEntry),
     void (*connectFail)(int idEntry),
     bool debug

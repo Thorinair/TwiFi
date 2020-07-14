@@ -46,7 +46,7 @@ void twifiInit(
     int entryCount,
     char* hostName,
     int timeout,
-    void (*connectAttempt)(int attempt),
+    void (*connectAttempt)(int idEntry, int attempt),
     void (*connectSuccess)(int idEntry),
     void (*connectFail)(int idEntry),
     bool debug

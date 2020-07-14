@@ -13,7 +13,7 @@ TwiFiEntry wifis[WIFI_COUNT] = {
 };
 
 
-void connectAttempt(int attempt) {
+void connectAttempt(int idEntry, int attempt) {
     /* Blink LED on and off while trying to connect. */
     if (attempt % 2)
         digitalWrite(13, LOW);
