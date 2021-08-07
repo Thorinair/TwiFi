@@ -108,18 +108,15 @@ static bool attemptWiFiConnection(char* ssid, char* pass, char* conf, bool isOpe
 
         WiFi.config(ipLocal, ipGateway, ipSubnet, ipDNS1, ipDNS2);
     }
+
     #ifdef ESP32
-        WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE);
+        WiFi.setHostname(vHostName);
     #endif
 
     if (isOpen)
         WiFi.begin(ssid, NULL);
     else    
         WiFi.begin(ssid, pass);
-
-    #ifdef ESP32
-        WiFi.setHostname(vHostName);
-    #endif
 
     int attempt = 0;
     while (WiFi.status() != WL_CONNECTED && attempt < (vTimeout * 1000) / WIFI_ATTEMPT_TIME) {        
@@ -171,6 +168,7 @@ bool twifiConnect(bool repeatAttempts) {
     setupWiFiSettings();
     
     WiFi.mode(WIFI_STA);
+    
     #ifdef ESP8266
         WiFi.hostname(vHostName);
     #endif
