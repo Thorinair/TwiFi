@@ -128,6 +128,7 @@ static bool attemptWiFiConnection(char* ssid, char* pass, char* conf, bool isOpe
         fConnectAttempt(currWiFi, attempt);
     }
     if (WiFi.status() == WL_CONNECTED) {
+        WiFi.setSleepMode(WIFI_NONE_SLEEP);
         if (vDebug) {
             Serial.print("\nConnected to WiFi: '" + (String) ssid + "' With IP: ");
             Serial.println(WiFi.localIP());
